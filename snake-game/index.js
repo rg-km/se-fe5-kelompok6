@@ -11,8 +11,6 @@ const DIRECTION = {
 };
 const MOVE_INTERVAL = 100;
 
-var audio = new Audio('asset/game-over.mp3');
-
 let img = new Image();
 img.src = 'asset/apple.png';
 
@@ -191,7 +189,6 @@ function checkCollision(snakes) {
         }
     }
     if (isCollide) {
-        audio.play();
         alert("Game over");aadssdw
         snake1 = initSnake("purple");
         snake2 = initSnake("blue");
