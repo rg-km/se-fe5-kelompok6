@@ -16,6 +16,15 @@ var audio = new Audio('asset/game-over.mp3');
 let img = new Image();
 img.src = 'asset/apple.png';
 
+let imghead = new Image();
+imghead.src = 'asset/snakehead.png';
+
+let imgbody = new Image();
+imgbody.src = 'asset/snakebody.png';
+
+let imgtail = new Image();
+imgtail.src = 'asset/snaketail.png';
+
 function initPosition() {
     return {
         x: Math.floor(Math.random() * WIDTH),
@@ -45,8 +54,6 @@ function initSnake(color) {
     }
 }
 let snake1 = initSnake("purple");
-let snake2 = initSnake("blue");
-let snake3 = initSnake("yellow");
 
 let apple1 = {
 	position: initPosition(),
@@ -56,9 +63,16 @@ let apple2 = {
 	position: initPosition(),
 };
 
-function drawCell(ctx, x, y, color) {
-    ctx.fillStyle = color;
-    ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+function drawCell(ctx, x, y) {
+    ctx.drawImage(imghead, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+}
+
+function drawCellbody(ctx, x, y) {
+    ctx.drawImage(imgbody, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+}
+
+function drawCelltail(ctx, x, y) {
+    ctx.drawImage(imgtail, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
 }
 
 function drawApple(ctx, x, y) {
@@ -70,12 +84,6 @@ function drawScore(snake) {
     if (snake.color == snake1.color) {
         scoreCanvas = document.getElementById("score1Board");
     } 
-    else if (snake.color == snake2.color) {
-        scoreCanvas = document.getElementById("score2Board");
-    } 
-    else {
-        scoreCanvas = document.getElementById("score3Board");
-    }
     let scoreCtx = scoreCanvas.getContext("2d");
 
     scoreCtx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
@@ -94,25 +102,9 @@ function draw() {
 		drawCell(ctx, snake1.head.x, snake1.head.y, snake1.color);
 		for (let i = 1; i < snake1.body.length; i++) {
 			if (i == snake1.body.length - 1) {
-				drawCell(ctx, snake1.body[i].x, snake1.body[i].y, snake1.color);
+				drawCelltail(ctx, snake1.body[i].x, snake1.body[i].y, snake1.color);
 			} else {
-				drawCell(ctx, snake1.body[i].x, snake1.body[i].y, 'red');
-			}
-		}
-		drawCell(ctx, snake2.head.x, snake2.head.y, snake2.color);
-		for (let i = 1; i < snake2.body.length; i++) {
-			if (i == snake2.body.length - 1) {
-				drawCell(ctx, snake2.body[i].x, snake2.body[i].y, snake2.color);
-			} else {
-				drawCell(ctx, snake2.body[i].x, snake2.body[i].y, 'red');
-			}
-		}
-		drawCell(ctx, snake3.head.x, snake3.head.y, snake3.color);
-		for (let i = 1; i < snake3.body.length; i++) {
-			if (i == snake3.body.length - 1) {
-				drawCell(ctx, snake3.body[i].x, snake3.body[i].y, snake3.color);
-			} else {
-				drawCell(ctx, snake3.body[i].x, snake3.body[i].y, 'red');
+				drawCellbody(ctx, snake1.body[i].x, snake1.body[i].y, 'red');
 			}
 		}
 
@@ -121,8 +113,6 @@ function draw() {
 		drawApple(ctx, apple2.position.x, apple2.position.y);
 
 		drawScore(snake1);
-		drawScore(snake2);
-		drawScore(snake3);
 	}, REDRAW_INTERVAL);
 }
 
@@ -194,8 +184,6 @@ function checkCollision(snakes) {
         audio.play();
         alert("Game over");aadssdw
         snake1 = initSnake("purple");
-        snake2 = initSnake("blue");
-        snake3 = initSnake("yellow");
     }
     return isCollide;
 }
@@ -216,7 +204,7 @@ function move(snake) {
             break;
     }
     moveBody(snake);
-    if (!checkCollision([snake1, snake2, snake3])) {
+    if (!checkCollision(snake1)) {
         setTimeout(function() {
             move(snake);
         }, MOVE_INTERVAL);
@@ -253,32 +241,10 @@ document.addEventListener("keydown", function (event) {
     } else if (event.key === "ArrowDown") {
         turn(snake1, DIRECTION.DOWN);
     }
-
-    if (event.key === "a") {
-        turn(snake2, DIRECTION.LEFT);
-    } else if (event.key === "d") {
-        turn(snake2, DIRECTION.RIGHT);
-    } else if (event.key === "w") {
-        turn(snake2, DIRECTION.UP);
-    } else if (event.key === "s") {
-        turn(snake2, DIRECTION.DOWN);
-    }
-
-    if (event.key === "j") {
-        turn(snake3, DIRECTION.LEFT);
-    } else if (event.key === "l") {
-        turn(snake3, DIRECTION.RIGHT);
-    } else if (event.key === "i") {
-        turn(snake3, DIRECTION.UP);
-    } else if (event.key === "k") {
-        turn(snake3, DIRECTION.DOWN);
-    }
 })
 
 function initGame() {
     move(snake1);
-    move(snake2);
-    move(snake3);
 }
 
 initGame();
