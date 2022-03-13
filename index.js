@@ -16,6 +16,7 @@ var audio = new Audio('asset/game-over.mp3');
 let img = new Image();
 img.src = 'asset/apple.png';
 
+ head-and-body
 let imghead = new Image();
 imghead.src = 'asset/snakehead.png';
 
@@ -25,6 +26,8 @@ imgbody.src = 'asset/snakebody.png';
 let imgtail = new Image();
 imgtail.src = 'asset/snaketail.png';
 
+
+ main
 function initPosition() {
     return {
         x: Math.floor(Math.random() * WIDTH),
@@ -63,6 +66,7 @@ let apple2 = {
 	position: initPosition(),
 };
 
+ head-and-body
 function drawCell(ctx, x, y) {
     ctx.drawImage(imghead, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
 }
@@ -73,6 +77,11 @@ function drawCellbody(ctx, x, y) {
 
 function drawCelltail(ctx, x, y) {
     ctx.drawImage(imgtail, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+
+function drawCell(ctx, x, y, color) {
+    ctx.fillStyle = color;
+    ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+ main
 }
 
 function drawApple(ctx, x, y) {
@@ -102,9 +111,15 @@ function draw() {
 		drawCell(ctx, snake1.head.x, snake1.head.y, snake1.color);
 		for (let i = 1; i < snake1.body.length; i++) {
 			if (i == snake1.body.length - 1) {
+ head-and-body
 				drawCelltail(ctx, snake1.body[i].x, snake1.body[i].y, snake1.color);
 			} else {
 				drawCellbody(ctx, snake1.body[i].x, snake1.body[i].y, 'red');
+
+				drawCell(ctx, snake1.body[i].x, snake1.body[i].y, snake1.color);
+			} else {
+				drawCell(ctx, snake1.body[i].x, snake1.body[i].y, 'red');
+ main
 			}
 		}
 
@@ -204,7 +219,15 @@ function move(snake) {
             break;
     }
     moveBody(snake);
+ head-and-body
     if (!checkCollision(snake1)) {
+
+apple
+    if (!checkCollision(snake1)) {
+
+    if (!checkCollision([snake1])) {
+ main
+ main
         setTimeout(function() {
             move(snake);
         }, MOVE_INTERVAL);
