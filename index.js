@@ -46,11 +46,6 @@ function initSnake(color) {
 }
 let snake1 = initSnake("purple");
 
-let life = {
-    color: "pink",
-    position: initPosition(),
-}
-
 let apple1 = {
     position: initPosition(),
 };
@@ -93,7 +88,7 @@ function draw() {
             if (i == snake1.body.length - 1) {
                 drawCell(ctx, snake1.body[i].x, snake1.body[i].y, snake1.color);
             } else {
-                drawCell(ctx, snake1.body[i].x, snake1.body[i].y, 'red');
+                drawCell(ctx, snake1.body[i].x, snake1.body[i].y, snake1.color);
             }
         }
 
