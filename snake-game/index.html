@@ -13,18 +13,20 @@
             padding: 0px;
             font-family: 'open sans', sans-serif;
         }
-        #snakeBoard, #score1Board {
-            margin: auto;
-            display: flex;
-            margin-bottom: 10px;
-        }
         canvas {
-            text-align: center;
+            justify-content: center;
         }
+
     </style>
     <body onload="draw();">
-        <h1 style="text-align: center;">Snake Game</h1>
-        <canvas id="snakeBoard" width="400" height="400" style="border:1px solid #000000;"></canvas><br>
-        <canvas id="score1Board" width="100" height="100" style="border:1px solid #000000;"></canvas>
+        <center>
+            <h1 style="text-align: center;">Snake Game</h1>
+            <canvas id="snakeBoard" width="400" height="400" style="border:1px solid #000000;"></canvas>
+            <h1 style="text-align: center;" >Snake Score - Snake Level</h1>
+            <canvas id="score1Board" width="100" height="100" style="border:1px solid #000000;"></canvas>
+            <canvas id="score2Board" width="100" height="100" style="border:1px solid #000000;"></canvas>
+            <h1 style="text-align: center;" >Snake Life</h1>
+            <canvas id="lifeBoard" width="400" height="100" style="border:1px solid #000000;"></canvas>
+        </center>
     </body>
 </html>
