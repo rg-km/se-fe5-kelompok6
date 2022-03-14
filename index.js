@@ -27,13 +27,13 @@ let img = new Image();
 img.src = 'asset/apple.png';
 
 let imghead = new Image();
-imghead.src = 'asset/bg3.png';
+imghead.src = 'asset/snakehead.png';
 
 let imgbody = new Image();
-imgbody.src = 'asset/bg4.png';
+imgbody.src = 'asset/snakebody.png';
 
 let imgtail = new Image();
-imgtail.src = 'asset/bg4.png';
+imgtail.src = 'asset/snaketail.png';
 
 let imglife = new Image();
 imglife.src = 'asset/diamond.png';
