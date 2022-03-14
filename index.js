@@ -9,6 +9,23 @@ const DIRECTION = {
     UP: 2,
     DOWN: 3,
 };
+
+const OBSTACLE = {
+    sizex: 50,
+    sizey: 200,
+    width: 300,
+    height: 20,
+    color: "black",
+};
+
+let OBSTACLE_LIST = []
+function drawObstacle(ctx, obstacle) {
+    for (let i = 0; i < obstacle.length; i++) {
+        ctx.fillStyle = OBSTACLE.color;
+        ctx.fillRect(obstacle[i].x, obstacle[i].y, OBSTACLE.width, OBSTACLE.height);
+    }
+}
+
 const MOVE_INTERVAL = 150;
 
 const isPrime = num => {
@@ -157,6 +174,8 @@ function draw() {
             ctx.drawImage(imglife, life.position.x * CELL_SIZE, life.position.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         }
 
+        drawObstacle(ctx, OBSTACLE_LIST)
+
         //apple
         drawApple(ctx, apple1.position.x, apple1.position.y);
         drawApple(ctx, apple2.position.x, apple2.position.y);
@@ -183,6 +202,10 @@ function teleport(snake) {
 }
 
 function eat(snake, apple) {
+    const obstacleKoor = {
+        x: 50,
+        y: 200,
+    }
     if (snake.head.x == apple1.position.x && snake.head.y == apple1.position.y) {
         apple1.position = initPosition();
         snake.score++;
@@ -191,6 +214,11 @@ function eat(snake, apple) {
             snakelife++;
             snakelevel++;
             audiolvl.play();
+            let obstacleY = obstacleKoor.y
+            if (OBSTACLE_LIST.length) {
+                obstacleY = OBSTACLE_LIST[OBSTACLE_LIST.length - 1].y + 50
+            }
+            OBSTACLE_LIST.push({x: obstacleKoor.x, y: obstacleY})
         }
     }
     if (snake.head.x == apple2.position.x && snake.head.y == apple2.position.y) {
@@ -201,6 +229,11 @@ function eat(snake, apple) {
             snakelife++;
             snakelevel++;
             audiolvl.play();
+            let obstacleY = obstacleKoor.y
+            if (OBSTACLE_LIST.length) {
+                obstacleY = OBSTACLE_LIST[OBSTACLE_LIST.length - 1].y + 50
+            }
+            OBSTACLE_LIST.push({x: obstacleKoor.x, y: obstacleY})
         }
     }
     if (snake.head.x == life.position.x && snake.head.y == life.position.y) {
