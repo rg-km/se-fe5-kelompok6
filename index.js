@@ -246,7 +246,7 @@ function checkCollision(snakes) {
         }
     }
     if (isCollide) {
-        //audio.play();
+        audio.play();
         snakelife = snakelife - 1;
         snakelevel = 0;
         //alert("Game over");aadssdw
