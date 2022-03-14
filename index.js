@@ -21,6 +21,7 @@ let snakelife = 0;
 let snakelevel = 0;
 
 var audio = new Audio('asset/game-over.mp3');
+var audiolvl = new Audio('asset/levelup.mp3');
 
 let img = new Image();
 img.src = 'asset/apple.png';
@@ -189,6 +190,7 @@ function eat(snake, apple) {
         if (snake.score % 5 === 0) {
             snakelife++;
             snakelevel++;
+            audiolvl.play();
         }
     }
     if (snake.head.x == apple2.position.x && snake.head.y == apple2.position.y) {
@@ -198,6 +200,7 @@ function eat(snake, apple) {
         if (snake.score % 5 === 0) {
             snakelife++;
             snakelevel++;
+            audiolvl.play();
         }
     }
     if (snake.head.x == life.position.x && snake.head.y == life.position.y) {
