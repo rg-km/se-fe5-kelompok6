@@ -284,6 +284,7 @@ function checkCollision(snakes) {
         snakelevel = 0;
         //alert("Game over");aadssdw
         snake1 = initSnake("purple");
+        OBSTACLE_LIST = []
     }
     return isCollide;
 }
